@@ -10,6 +10,9 @@ export enum EntitiesActionTypes {
 
     UPDATE = 'ENTITIES@@UPDATE',
     UPDATE_SUCCESS = 'ENTITIES@@UPDATE_SUCCESS',
+
+    DESTROY = 'ENTITIES@@DESTROY',
+    DESTROY_SUCCESS = 'ENTITIES@@DESTROY_SUCCESS',
 }
 
 /** Action List **/

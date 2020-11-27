@@ -32,6 +32,10 @@ export class EntityFactory {
         component.setEntity(this);
     }
 
+    destroy(): void {
+
+    }
+
     loop(delta: number): void {
         this.components.map(component => component.loop(delta));
     }
