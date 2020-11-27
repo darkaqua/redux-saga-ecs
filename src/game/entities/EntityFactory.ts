@@ -1,36 +1,30 @@
-import {Components} from "../systems";
-
-//mock saga
-export const __ENTITIES_TEST_DATA: Map<string, any> = new Map<string, any>();
+import {Components} from "../components";
+import {addEntityDispatchAction, updateEntityDispatchAction} from "../../store/entities/dispatchers";
+import {EntityType, getEntityData, IBasicEntityData} from "../../store/entities";
+import {store} from "../../dataStore";
 
 export class EntityFactory {
 
     public readonly id: string;
-    public readonly name: string;
 
     private components: Components[];
 
     constructor(
         id: string,
-        name: string
+        type: EntityType
     ) {
         this.id = id;
-        this.name = name;
 
         this.components = [];
-
-        __ENTITIES_TEST_DATA.set(id, {});
+        store.dispatch(addEntityDispatchAction<IBasicEntityData>(this.id, { type }));
     }
 
     getData<T>(): T {
-        return __ENTITIES_TEST_DATA.get(this.id);
+        return getEntityData(this.id)[1] || {} as any;
     }
 
     setData<T>(data: T): void {
-        __ENTITIES_TEST_DATA.set(this.id, {
-            ...__ENTITIES_TEST_DATA.get(this.id),
-            ...data
-        })
+        store.dispatch(updateEntityDispatchAction(this.id, data));
     }
 
     addComponent(component: Components): void {
