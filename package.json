@@ -16,6 +16,7 @@
   "devDependencies": {
     "@types/node": "latest",
     "nodemon": "latest",
+    "redux": "^4.0.5",
     "ts-node": "latest",
     "typescript": "latest"
   }
