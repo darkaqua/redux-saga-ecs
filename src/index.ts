@@ -1,18 +1,19 @@
 
-import {store} from "./dataStore";
-import {Mob, Player} from "./game/entities";
+import './dataStore';
 
-const p = new Player('player 1');
-const p1 = new Player('player 2');
+import {ComponentFactory} from "./game/components";
+import {Mob, Player} from "./game/entities";
+import {getEntities} from "./store/entities";
+
+const componentFactory = new ComponentFactory();
+
+const p = new Player('player 1', { x: 0, y: -3 });
+const p1 = new Player('player 2', { x: 0, y: -92 });
 const mob = new Mob('Im a mob');
-p1.setData({
-    position: {
-        x: 4,
-        y: 0
-    }
-})
+
 
 setInterval(() => {
-    p.loop(1);
-    console.log(JSON.stringify(store.getState()))
+    componentFactory.update(Math.random())
+    console.log('-------------------' + Date.now() + '-------------------');
+    console.log(JSON.stringify(getEntities(), null, 2))
 }, 1000);

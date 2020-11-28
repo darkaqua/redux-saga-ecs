@@ -1,27 +1,19 @@
-import {Entities} from "../entities";
-import {IEntityData} from "../../store/entities";
 
-export class ComponentFactory<IData> {
+import {Component, Movement, State} from ".";
 
-    public readonly id: string;
-    public readonly data: IData;
+export class ComponentFactory {
 
-    protected entity: Entities;
+    public readonly components: Component<any>[];
 
-    constructor(
-        id: string,
-        data?: IData
-    ) {
-        this.id = id;
-
-        this.data = data;
+    constructor() {
+        this.components = [
+            new Movement(),
+            new State()
+        ]
     }
 
-    loop(delta: number): void { }
-
-    setEntity(entity: Entities): void {
-        this.entity = entity;
-        this.entity.setData(this.data);
+    update(delta: number): void {
+        this.components.forEach((component) => component.update(delta));
     }
 
 }

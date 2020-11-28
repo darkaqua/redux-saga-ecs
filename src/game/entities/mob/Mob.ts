@@ -1,13 +1,14 @@
-import {EntityFactory} from "../EntityFactory";
-import {Movement, Stats} from "../../components";
+import {Entity} from "../Entity";
+import {EntityType} from "../EntityType";
+import {ComponentId} from "../../components";
 
-export class Mob extends EntityFactory {
+export class Mob extends Entity {
 
     constructor(
         id: string
     ) {
-        super(id, 'mob');
-        this.addComponent(new Stats());
+        super(id, EntityType.MOB);
+        this.addComponent(ComponentId.Movement);
     }
 
 }

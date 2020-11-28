@@ -1,5 +1,5 @@
 
-import {EntitiesActionTypes, IEntityData} from "./types";
+import {EntitiesActionTypes} from "./types";
 import {IAddEntityAction, IAddEntityActionSuccess, IUpdateEntityAction, IUpdateEntityActionSuccess} from "./actions";
 
 /** Actions **/

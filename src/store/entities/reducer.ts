@@ -2,9 +2,9 @@ import {Reducer} from 'redux'
 import {produce} from 'immer'
 import {EntitiesState, EntitiesActionTypes, EntitiesActions, entitiesDefaultState} from "./types";
 
-export const entitiesReducer: Reducer<EntitiesState, EntitiesActions<any>> = (
+export const entitiesReducer: Reducer<EntitiesState, EntitiesActions> = (
     state = entitiesDefaultState(),
-    action: EntitiesActions<any>
+    action: EntitiesActions
 ) => {
     switch (action.type) {
         case EntitiesActionTypes.ADD_SUCCESS:

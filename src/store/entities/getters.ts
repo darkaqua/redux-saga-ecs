@@ -1,12 +1,16 @@
-import {EntityType, IEntityData} from "./types";
+import {EntitiesState, IEntityData} from "./types";
 import {store} from "../../dataStore";
+import {EntityType} from "../../game/entities";
 
-export const getEntities = (): [string, IEntityData][] =>
-    Object.entries(store.getState().entities)
+export const getEntitiesState = (): EntitiesState =>
+    store.getState().entities;
 
-export const getEntityData = (id: string): [string, IEntityData] =>
-    getEntities().find(([_id]) => id === _id);
+export const getEntities = <T>(): [string, T & IEntityData][] =>
+    Object.entries(getEntitiesState()) as any
+
+export const getEntityData = <T>(id: string): T & IEntityData =>
+    getEntitiesState()[id] as any;
 
 export const getEntitiesByType = (type: EntityType): [string, IEntityData][] =>
-    Object.entries(store.getState().entities).filter(([id, entityData]) => entityData.type === type);
+    getEntities().filter(([id, entityData]) => entityData.type === type);
 

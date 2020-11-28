@@ -1,16 +1,15 @@
-import {ComponentFactory} from "../ComponentFactory";
+
+import {getEntities, getEntityData} from "../../../store/entities";
 import {IMovement} from "./IMovement";
-import {getEntities, getEntitiesByType} from "../../../store/entities";
+import {ComponentId} from "../ComponentId";
+import {Component} from "../Component";
 import {IStats} from "../stats/IStats";
 
-export class Movement extends ComponentFactory<IMovement> {
+export class Movement extends Component<IMovement> {
 
-    constructor(
-        // Example for entities to set information
-        type?: string
-    ) {
+    constructor() {
         super(
-            'movement',
+            ComponentId.Movement,
             {
                 position: {
                     x: 0,
@@ -19,36 +18,23 @@ export class Movement extends ComponentFactory<IMovement> {
                 }
             }
         );
-
     }
 
-    loop(delta: number) {
-        let { position, stats } = this.entity.getData<IMovement & IStats>();
+    updateEntity(delta: number, entityId: string) {
+        let { position, stats, type } = getEntityData<IMovement & IStats>(entityId);
 
-        if(position.target) {
-            return console.log(this.entity.id, ' is targeting ', position.target)
-        }
+        const collidedEntity = getEntities<IMovement>()
+            .find(([entityId, data]) => data.position && data.position.x === position.x + 1)
 
-        const collision = getEntities()
-            .filter(([entityId, data]: [string, IMovement]) => data.position && data.position.x === position.x + 1)
-
-        if(collision.length > 0) {
-            this.entity.setData<IMovement>({
-                position: {
-                    ...position,
-                    target: this.entity.id
-                }
-            });
-            this.entity.setData<IStats>({
+        if(collidedEntity && stats) {
+            this.updateEntityData<IStats>(entityId, {
                 stats: {
-                    ...stats,
                     level: stats.level + 1
                 }
             });
-            return
         }
 
-        this.entity.setData({
+        this.updateEntityData(entityId, {
             position: {
                 ...position,
                 x: position.x + 1

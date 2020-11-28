@@ -1,9 +1,6 @@
-import {Player} from "./player/Player";
-import {Mob} from "./mob/Mob";
+
+export * from './Entity';
+export * from './EntityType';
 
 export * from './player/Player';
 export * from './mob/Mob';
-
-export type Entities =
-    | Player
-    | Mob

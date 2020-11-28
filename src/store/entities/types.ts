@@ -1,7 +1,13 @@
 
-import {IAddEntityAction, IAddEntityActionSuccess, IUpdateEntityAction, IUpdateEntityActionSuccess} from "./actions";
-import {IMovement} from "../../game/components/movement/IMovement";
-import {IStats} from "../../game/components/stats/IStats";
+import {
+    IAddEntityAction,
+    IAddEntityActionSuccess,
+    IDestroyEntityAction, IDestroyEntityActionSuccess,
+    IUpdateEntityAction,
+    IUpdateEntityActionSuccess
+} from "./actions";
+import {EntityType} from "../../game/entities";
+import {IComponents, IMovement, IStats} from "../../game/components";
 
 /** Action Types **/
 export enum EntitiesActionTypes {
@@ -16,12 +22,15 @@ export enum EntitiesActionTypes {
 }
 
 /** Action List **/
-export type EntitiesActions<T> =
-    | IAddEntityAction<T>
-    | IUpdateEntityAction<T>
+export type EntitiesActions =
+    | IAddEntityAction<any>
+    | IAddEntityActionSuccess<any>
 
-    | IAddEntityActionSuccess<T>
-    | IUpdateEntityActionSuccess<T>
+    | IUpdateEntityAction<any>
+    | IUpdateEntityActionSuccess<any>
+
+    | IDestroyEntityAction
+    | IDestroyEntityActionSuccess
 
 /** Default State Values **/
 export const entitiesDefaultState = (): EntitiesState => ({ });
@@ -36,11 +45,5 @@ export interface EntitiesState {
 export interface IBasicEntityData {
     type: EntityType;
 }
-export interface IEntityData extends
-    IBasicEntityData,
 
-    IMovement,
-    IStats
-{}
-
-export type EntityType = 'player' | 'mob';
+export type IEntityData = IBasicEntityData & IComponents;

@@ -4,20 +4,20 @@ import {IAddEntityAction, IUpdateEntityAction} from "./actions";
 import {addEntityDispatchActionSuccess, updateEntityDispatchActionSuccess} from "./dispatchers";
 
 /** Initial saga **/
-export function* exampleSaga() {
+export function* entitiesSaga() {
     yield all([
         takeEvery(EntitiesActionTypes.ADD, add),
         takeEvery(EntitiesActionTypes.UPDATE, update),
-    ])
+    ]);
 }
 
 /** Saga functions **/
 //
-function* add<T>(action: IAddEntityAction<T>) {
-    yield put<EntitiesActions<T>>(addEntityDispatchActionSuccess(action.id, action.entityData));
+function* add(action: IAddEntityAction<any>) {
+    yield put<EntitiesActions>(addEntityDispatchActionSuccess(action.id, action.entityData));
 }
 
-function* update<T>(action: IUpdateEntityAction<T>) {
-    yield put<EntitiesActions<T>>(updateEntityDispatchActionSuccess(action.id, action.entityData));
+function* update(action: IUpdateEntityAction<any>) {
+    yield put<EntitiesActions>(updateEntityDispatchActionSuccess(action.id, action.entityData));
 }
 

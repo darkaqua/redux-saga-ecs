@@ -1,23 +1,28 @@
 import {combineReducers} from 'redux';
-import {entitiesReducer, exampleSaga, EntitiesState, EntitiesActions} from "./entities";
+import {entitiesReducer, EntitiesState, EntitiesActions, entitiesSaga} from "./entities";
 import {all} from "@redux-saga/core/effects";
+import {ComponentsActions, componentsReducer, componentsSaga, ComponentsState} from "./components";
 
 /** Default State **/
 export interface DefaultState {
-    entities: EntitiesState
+    entities: EntitiesState,
+    components: ComponentsState
 }
 
 /** root Reducers **/
 export const rootReducer = combineReducers({
-    entities: entitiesReducer
+    entities: entitiesReducer,
+    components: componentsReducer
 });
 
-export type Actions<T> =
-    | EntitiesActions<T>
+export type Actions =
+    | EntitiesActions
+    | ComponentsActions
 
 /** root Sagas **/
 export function* rootSaga() {
     yield all([
-        exampleSaga()
+        entitiesSaga(),
+        componentsSaga()
     ]);
 }

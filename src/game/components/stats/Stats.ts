@@ -1,24 +1,25 @@
-import {ComponentFactory} from "../ComponentFactory";
+import {Component} from "../Component";
+import {ComponentId} from "../ComponentId";
 import {IStats} from "./IStats";
-import {getEntities, getEntitiesByType} from "../../../store/entities";
+import {getEntityData} from "../../../store/entities";
+import {IMovement} from "..";
 
-export class Stats extends ComponentFactory<IStats> {
+export class State extends Component<IStats> {
 
     constructor() {
         super(
-            'stats',
+            ComponentId.Stats,
             {
                 stats: {
-                    level: 0,
-                    abc: false
+                    level: 0
                 }
             }
         );
-
     }
 
-    loop(delta: number) {
 
+    updateEntity(delta: number, entityId: string) {
+        let { stats } = getEntityData<IStats>(entityId);
     }
 
 }
