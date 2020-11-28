@@ -18,7 +18,7 @@ export class Entity {
     }
 
     getData<T>(): T {
-        return getEntityData(this.id)[1] || {} as any;
+        return getEntityData(this.id);
     }
 
     setData<T>(data: T): void {

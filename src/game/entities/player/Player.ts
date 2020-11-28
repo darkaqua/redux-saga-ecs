@@ -1,27 +1,16 @@
 import {Entity} from "../Entity";
 import {EntityType} from "../EntityType";
-import {ComponentId, IMovement} from "../../components";
+import {ComponentId, IMovement, IStats} from "../../components";
 
 export class Player extends Entity {
 
     constructor(
         id: string,
-        position: {
-            x: number,
-            y: number
-        }
+        data: IMovement & IStats
     ) {
         super(id, EntityType.PLAYER);
-        this.addComponent(
-            ComponentId.Movement,
-            {
-                position: {
-                    ...position,
-                    target: undefined
-                }
-            }
-            );
-        this.addComponent(ComponentId.Stats);
+        this.addComponent(ComponentId.Movement, { position: data.position });
+        this.addComponent(ComponentId.Stats, { stats: data.stats });
     }
 
 }

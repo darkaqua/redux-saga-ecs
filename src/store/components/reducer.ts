@@ -7,7 +7,7 @@ export const componentsReducer: Reducer<ComponentsState, ComponentsActions> = (
     action: ComponentsActions
 ) => {
     switch (action.type) {
-        case ComponentsActionTypes.ADD:
+        case ComponentsActionTypes.ADD_SUCCESS:
             return produce(state, (copyState: ComponentsState) => {
                 copyState[action.componentId] = {
                     entities: [],

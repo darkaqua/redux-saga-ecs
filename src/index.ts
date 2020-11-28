@@ -1,16 +1,28 @@
 
 import './dataStore';
 
-import {ComponentFactory} from "./game/components";
+import {ComponentFactory, IMovement, IStats} from "./game/components";
 import {Mob, Player} from "./game/entities";
 import {getEntities} from "./store/entities";
+import {EntityFactory} from "./game/entities/EntityFactory";
 
 const componentFactory = new ComponentFactory();
+const entityFactory = new EntityFactory();
 
-const p = new Player('player 1', { x: 0, y: -3 });
-const p1 = new Player('player 2', { x: 0, y: -92 });
-const mob = new Mob('Im a mob');
+const playerDefaults: IMovement & IStats = {
+    position: {
+        x: 0,
+        y: -3,
+        target: undefined
+    },
+    stats: {
+        level: 10
+    }
+}
 
+entityFactory.addEntity(new Player('player 1', playerDefaults));
+entityFactory.addEntity(new Player('player 2', playerDefaults));
+entityFactory.addEntity(new Mob('Im a mob'));
 
 setInterval(() => {
     componentFactory.update(Math.random())
