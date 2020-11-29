@@ -2,6 +2,7 @@ import {entitiesReducer} from "./reducer";
 import {addEntityDispatchActionSuccess, updateEntityDispatchActionSuccess} from "./dispatchers";
 import {entitiesDefaultState, EntitiesState} from "./types";
 
+// https://redux-saga.js.org/docs/advanced/Testing.html
 describe('entities reducer', () => {
     let state: EntitiesState = entitiesDefaultState();
 

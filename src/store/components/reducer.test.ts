@@ -3,6 +3,7 @@ import {componentsDefaultState, ComponentsState} from "./types";
 import {addComponentDispatchActionSuccess, addEntityComponentDispatchActionSuccess} from "./dispatchers";
 import {ComponentId} from "../../game/components";
 
+// https://redux-saga.js.org/docs/advanced/Testing.html
 describe('components reducer', () => {
     let state: ComponentsState = componentsDefaultState();
 
