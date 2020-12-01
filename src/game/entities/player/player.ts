@@ -11,21 +11,10 @@ export class Player extends EntityAbstract<playerType> {
         id: string
     ) {
         super(
-            id,
-            [
-                ComponentEnum.POSITION,
-                ComponentEnum.TAG
-            ],
-            {
-                position: {
-                    x: 69,
-                    y: 420
-                },
-                tag: {
-                    username: 'player'
-                }
-            }
+            id
         );
+        this.addComponent<PositionInterface>(ComponentEnum.POSITION, { position: { x: 69, y: 420 } });
+        this.addComponent<TagInterface>(ComponentEnum.TAG, { tag: { username: 'username' } });
     }
 
 }

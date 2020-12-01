@@ -16,7 +16,7 @@ export class Movement extends SystemAbstract {
     updateEntity(delta: number, entityId: string) {
         const { position, tag } = getEntity<PositionInterface & TagInterface>(entityId);
 
-        console.log(position, tag);
+        console.log(entityId, position, tag)
     }
 
 }
