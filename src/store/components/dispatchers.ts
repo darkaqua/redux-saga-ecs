@@ -1,64 +1,47 @@
 
 import {ComponentsActionTypes} from "./types";
 import {
-    IAddComponentAction, IAddComponentActionSuccess,
     IAddEntityComponentAction,
     IAddEntityComponentActionSuccess,
     IRemoveEntityComponentAction,
     IRemoveEntityComponentActionSuccess
 } from "./actions";
-import {ComponentId, IComponents} from "../../game/components";
+import {ComponentEnum} from "../../game/components/component/component.enum";
 
 /** Actions **/
-export const addComponentDispatchAction = (
-    componentId: ComponentId,
-    defaultData: IComponents
-): IAddComponentAction => ({
-    type: ComponentsActionTypes.ADD,
-    componentId,
-    defaultData
-});
-export const addEntityComponentDispatchAction = (
-    componentId: ComponentId,
+export const addEntityComponentDispatchAction = <TComponentData>(
+    componentEnum: ComponentEnum,
     entityId: string,
-    defaultData?: IComponents
-): IAddEntityComponentAction => ({
+    componentData?: TComponentData
+): IAddEntityComponentAction<TComponentData> => ({
     type: ComponentsActionTypes.ADD_ENTITY,
-    componentId,
+    componentEnum,
     entityId,
-    defaultData
+    componentData
 });
 export const removeEntityComponentDispatchAction = (
-    componentId: ComponentId,
+    componentEnum: ComponentEnum,
     entityId: string
 ): IRemoveEntityComponentAction => ({
     type: ComponentsActionTypes.REMOVE_ENTITY,
-    componentId,
+    componentEnum,
     entityId
 });
 
 /** Saga Actions **/
-export const addComponentDispatchActionSuccess = (
-    componentId: ComponentId,
-    defaultData: IComponents
-): IAddComponentActionSuccess => ({
-    type: ComponentsActionTypes.ADD_SUCCESS,
-    componentId,
-    defaultData
-});
 export const addEntityComponentDispatchActionSuccess = (
-    componentId: ComponentId,
+    componentEnum: ComponentEnum,
     entityId: string
 ): IAddEntityComponentActionSuccess => ({
     type: ComponentsActionTypes.ADD_ENTITY_SUCCESS,
-    componentId,
+    componentEnum,
     entityId
 });
 export const removeEntityComponentDispatchActionSuccess = (
-    componentId: ComponentId,
+    componentEnum: ComponentEnum,
     entityId: string
 ): IRemoveEntityComponentActionSuccess => ({
     type: ComponentsActionTypes.REMOVE_ENTITY_SUCCESS,
-    componentId,
+    componentEnum,
     entityId
 });

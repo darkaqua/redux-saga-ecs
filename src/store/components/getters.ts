@@ -1,12 +1,12 @@
 import {store} from "../../dataStore";
-import {ComponentsState, IComponentData} from "./types";
-import {ComponentId} from "../../game/components";
+import {ComponentEnum} from "../../game/components/component/component.enum";
+import {ComponentInterface} from "../../game/components/component/component.interface";
 
-export const getComponentsState = (): ComponentsState =>
+export const getComponentsState = () =>
     store.getState().components;
 
-export const getComponentsData = (): [string | ComponentId, IComponentData<any>][] =>
-    Object.entries(getComponentsState());
+export const getComponentState = (componentEnum: ComponentEnum): ComponentInterface =>
+    getComponentsState()[componentEnum];
 
-export const getComponentData = <DataInterface>(componentId: ComponentId): IComponentData<DataInterface> =>
-    getComponentsState()[componentId];
+export const getComponentEntities = (componentEnum: ComponentEnum): string[] =>
+    getComponentState(componentEnum).entities;

@@ -1,40 +1,58 @@
 
 import {EntitiesActionTypes} from "./types";
-import {IAddEntityAction, IAddEntityActionSuccess, IUpdateEntityAction, IUpdateEntityActionSuccess} from "./actions";
+import {
+    IAddEntityAction,
+    IAddEntityActionSuccess,
+    IDestroyEntityAction, IDestroyEntityActionSuccess,
+    IUpdateEntityAction,
+    IUpdateEntityActionSuccess
+} from "./actions";
 
 /** Actions **/
-export const addEntityDispatchAction = <T>(
+export const addEntityDispatchAction = <TEntityData>(
     id: string,
-    entityData: T = {} as any
-): IAddEntityAction<T> => ({
+    entityData: TEntityData = {} as any
+): IAddEntityAction<TEntityData> => ({
     type: EntitiesActionTypes.ADD,
     id,
     entityData
 });
-export const updateEntityDispatchAction = <T>(
+export const updateEntityDispatchAction = <TEntityData>(
     id: string,
-    entityData: T
-): IUpdateEntityAction<T> => ({
+    entityData: TEntityData
+): IUpdateEntityAction<TEntityData> => ({
     type: EntitiesActionTypes.UPDATE,
     id,
     entityData
 });
+export const destroyEntityDispatchAction = (
+    id: string
+): IDestroyEntityAction => ({
+    type: EntitiesActionTypes.DESTROY,
+    id
+});
 
 /** Saga Actions **/
-export const addEntityDispatchActionSuccess = <T>(
+export const addEntityDispatchActionSuccess = <TEntityData>(
     id: string,
-    entityData: T
-): IAddEntityActionSuccess<T> => ({
+    entityData: TEntityData
+): IAddEntityActionSuccess<TEntityData> => ({
     type: EntitiesActionTypes.ADD_SUCCESS,
     id,
     entityData
 });
-export const updateEntityDispatchActionSuccess = <T>(
+export const updateEntityDispatchActionSuccess = <TEntityData>(
     id: string,
-    entityData: T
-): IUpdateEntityActionSuccess<T> => ({
+    entityData: TEntityData
+): IUpdateEntityActionSuccess<TEntityData> => ({
     type: EntitiesActionTypes.UPDATE_SUCCESS,
     id,
     entityData
+});
+export const destroyEntityDispatchActionSuccess = (
+    id: string
+): IDestroyEntityActionSuccess => ({
+    type: EntitiesActionTypes.DESTROY_SUCCESS,
+    id
 });
 

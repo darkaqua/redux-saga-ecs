@@ -7,20 +7,13 @@ export const componentsReducer: Reducer<ComponentsState, ComponentsActions> = (
     action: ComponentsActions
 ) => {
     switch (action.type) {
-        case ComponentsActionTypes.ADD_SUCCESS:
-            return produce(state, (copyState: ComponentsState) => {
-                copyState[action.componentId] = {
-                    entities: [],
-                    defaultData: action.defaultData
-                }
-            });
         case ComponentsActionTypes.ADD_ENTITY_SUCCESS:
             return produce(state, (copyState: ComponentsState) => {
-                copyState[action.componentId].entities.push(action.entityId)
+                copyState[action.componentEnum].entities.push(action.entityId)
             });
         case ComponentsActionTypes.REMOVE_ENTITY_SUCCESS:
             return produce(state, (copyState: ComponentsState) => {
-                copyState[action.componentId].entities = copyState[action.componentId].entities
+                copyState[action.componentEnum].entities = copyState[action.componentEnum].entities
                     .filter(entityId => entityId !== action.entityId);
             });
     }

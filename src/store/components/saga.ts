@@ -1,19 +1,17 @@
 import {all, put, takeEvery} from "@redux-saga/core/effects";
 import {ComponentsActions, ComponentsActionTypes} from "./types";
-import {IAddComponentAction, IAddEntityComponentAction} from "./actions";
+import {IAddEntityComponentAction} from "./actions";
 import {
-    addComponentDispatchActionSuccess,
-    addEntityComponentDispatchActionSuccess, removeEntityComponentDispatchActionSuccess,
+    addEntityComponentDispatchActionSuccess,
+    removeEntityComponentDispatchActionSuccess,
 } from "./dispatchers";
-import {updateEntityDispatchAction} from "../entities/dispatchers";
-import {getComponentData} from "./getters";
+import components from "../../game/components/components";
 import {EntitiesActions} from "../entities";
-import {IComponents} from "../../game/components";
+import {updateEntityDispatchAction} from "../entities/dispatchers";
 
 /** Initial saga **/
 export function* componentsSaga() {
     yield all([
-        takeEvery(ComponentsActionTypes.ADD, add),
         takeEvery(ComponentsActionTypes.ADD_ENTITY, addEntity),
         takeEvery(ComponentsActionTypes.REMOVE_ENTITY, removeEntity),
     ]);
@@ -21,16 +19,12 @@ export function* componentsSaga() {
 
 /** Saga functions **/
 //
-function* add(action: IAddComponentAction) {
-    yield put<ComponentsActions>(addComponentDispatchActionSuccess(action.componentId, action.defaultData));
+function* addEntity(action: IAddEntityComponentAction<any>) {
+    const { defaultData } = components[action.componentEnum];
+    yield put<EntitiesActions>(updateEntityDispatchAction(action.entityId, action.componentData || defaultData))
+    yield put<ComponentsActions>(addEntityComponentDispatchActionSuccess(action.componentEnum, action.entityId));
 }
 
-function* addEntity(action: IAddEntityComponentAction) {
-    const { defaultData } = getComponentData(action.componentId);
-    yield put<EntitiesActions>(updateEntityDispatchAction(action.entityId, action.defaultData || defaultData))
-    yield put<ComponentsActions>(addEntityComponentDispatchActionSuccess(action.componentId, action.entityId));
-}
-
-function* removeEntity(action: IAddEntityComponentAction) {
-    yield put<ComponentsActions>(removeEntityComponentDispatchActionSuccess(action.componentId, action.entityId));
+function* removeEntity(action: IAddEntityComponentAction<any>) {
+    yield put<ComponentsActions>(removeEntityComponentDispatchActionSuccess(action.componentEnum, action.entityId));
 }

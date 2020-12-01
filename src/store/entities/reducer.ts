@@ -18,6 +18,10 @@ export const entitiesReducer: Reducer<EntitiesState, EntitiesActions> = (
                     ...action.entityData
                 };
             });
+        case EntitiesActionTypes.DESTROY_SUCCESS:
+            return produce(state, (copyState: EntitiesState) => {
+                delete copyState[action.id];
+            });
     }
     return state
 }

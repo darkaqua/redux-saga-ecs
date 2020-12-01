@@ -10,6 +10,7 @@ const sagaMiddleware = createSagaMiddleware();
 /** Store creation **/
 export const store: Store<DefaultState, Actions> = createStore<DefaultState, Actions, any, any>(
     rootReducer,
+    {} as any,
     applyMiddleware(thunk, sagaMiddleware)
 );
 sagaMiddleware.run(rootSaga);

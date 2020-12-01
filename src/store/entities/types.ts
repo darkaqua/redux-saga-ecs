@@ -6,8 +6,7 @@ import {
     IUpdateEntityAction,
     IUpdateEntityActionSuccess
 } from "./actions";
-import {EntityType} from "../../game/entities";
-import {IComponents, IMovement, IStats} from "../../game/components";
+import {ComponentTypes} from "../../game/components/component/component.types";
 
 /** Action Types **/
 export enum EntitiesActionTypes {
@@ -37,13 +36,5 @@ export const entitiesDefaultState = (): EntitiesState => ({ });
 
 /** State **/
 export interface EntitiesState {
-    [id: string]: IEntityData
+    [id: string]: ComponentTypes
 }
-
-/** Interfaces **/
-//...
-export interface IBasicEntityData {
-    type: EntityType;
-}
-
-export type IEntityData = IBasicEntityData & IComponents;

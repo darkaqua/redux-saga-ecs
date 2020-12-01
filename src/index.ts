@@ -1,31 +1,18 @@
-
 import './dataStore';
+import {Movement} from "./game/systems/movement/movement";
+import {store} from "./dataStore";
+import {addEntityDispatchAction} from "./store/entities/dispatchers";
+import {addEntityComponentDispatchAction} from "./store/components/dispatchers";
+import {ComponentEnum} from "./game/components/component/component.enum";
+import {PositionInterface} from "./game/components/position/position.interface";
 
-import {ComponentFactory, IMovement, IStats} from "./game/components";
-import {Mob, Player} from "./game/entities";
-import {getEntities} from "./store/entities";
-import {EntityFactory} from "./game/entities/EntityFactory";
+// setInterval(() => {
+//     console.log('-------------------' + Date.now() + '-------------------');
+//     console.log(JSON.stringify(getEntitiesState(), null, 2))
+// }, 1000);
 
-const componentFactory = new ComponentFactory();
-const entityFactory = new EntityFactory();
+store.dispatch(addEntityDispatchAction('player'))
+store.dispatch(addEntityComponentDispatchAction<PositionInterface>(ComponentEnum.POSITION, 'player', { position: { x: 69, y: 420 } }));
+store.dispatch(addEntityComponentDispatchAction(ComponentEnum.TAG, 'player'));
 
-const playerDefaults: IMovement & IStats = {
-    position: {
-        x: 0,
-        y: -3,
-        target: undefined
-    },
-    stats: {
-        level: 10
-    }
-}
-
-entityFactory.addEntity(new Player('player 1', playerDefaults));
-entityFactory.addEntity(new Player('player 2', playerDefaults));
-entityFactory.addEntity(new Mob('Im a mob'));
-
-setInterval(() => {
-    componentFactory.update(Math.random())
-    console.log('-------------------' + Date.now() + '-------------------');
-    console.log(JSON.stringify(getEntities(), null, 2))
-}, 1000);
+new Movement().update(3)

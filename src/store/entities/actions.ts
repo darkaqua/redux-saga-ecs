@@ -1,16 +1,16 @@
-import {EntitiesActionTypes, IEntityData} from "./types";
+import {EntitiesActionTypes} from "./types";
 
 
 /** Saga Actions **/
-export interface IAddEntityAction<T> {
+export interface IAddEntityAction<TEntityData> {
     type: typeof EntitiesActionTypes.ADD
     id: string;
-    entityData: T;
+    entityData: TEntityData;
 }
-export interface IUpdateEntityAction<T> {
+export interface IUpdateEntityAction<TEntityData> {
     type: typeof EntitiesActionTypes.UPDATE
     id: string;
-    entityData: T;
+    entityData: TEntityData;
 }
 export interface IDestroyEntityAction {
     type: typeof EntitiesActionTypes.DESTROY
@@ -18,15 +18,15 @@ export interface IDestroyEntityAction {
 }
 
 /** Actions **/
-export interface IAddEntityActionSuccess<T> {
+export interface IAddEntityActionSuccess<TEntityData> {
     type: typeof EntitiesActionTypes.ADD_SUCCESS
     id: string;
-    entityData: T;
+    entityData: TEntityData;
 }
-export interface IUpdateEntityActionSuccess<T> {
+export interface IUpdateEntityActionSuccess<TEntityData> {
     type: typeof EntitiesActionTypes.UPDATE_SUCCESS
     id: string;
-    entityData: T;
+    entityData: TEntityData;
 }
 export interface IDestroyEntityActionSuccess {
     type: typeof EntitiesActionTypes.DESTROY_SUCCESS
