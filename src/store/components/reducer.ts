@@ -7,6 +7,12 @@ export const componentsReducer: Reducer<ComponentsState, ComponentsActions> = (
     action: ComponentsActions
 ) => {
     switch (action.type) {
+        case ComponentsActionTypes.ADD_SUCCESS:
+            return produce(state, (copyState: ComponentsState) => {
+                copyState[action.componentEnum] = {
+                    entities: []
+                }
+            });
         case ComponentsActionTypes.ADD_ENTITY_SUCCESS:
             return produce(state, (copyState: ComponentsState) => {
                 copyState[action.componentEnum].entities.push(action.entityId)

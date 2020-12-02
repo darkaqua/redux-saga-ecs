@@ -2,7 +2,8 @@
 import {
     IAddEntityAction,
     IAddEntityActionSuccess,
-    IDestroyEntityAction, IDestroyEntityActionSuccess,
+    IRemoveEntityAction,
+    IRemoveEntityActionSuccess,
     IUpdateEntityAction,
     IUpdateEntityActionSuccess
 } from "./actions";
@@ -16,8 +17,8 @@ export enum EntitiesActionTypes {
     UPDATE = 'ENTITIES@@UPDATE',
     UPDATE_SUCCESS = 'ENTITIES@@UPDATE_SUCCESS',
 
-    DESTROY = 'ENTITIES@@DESTROY',
-    DESTROY_SUCCESS = 'ENTITIES@@DESTROY_SUCCESS',
+    REMOVE = 'ENTITIES@@REMOVE',
+    REMOVE_SUCCESS = 'ENTITIES@@REMOVE_SUCCESS',
 }
 
 /** Action List **/
@@ -28,8 +29,8 @@ export type EntitiesActions =
     | IUpdateEntityAction<any>
     | IUpdateEntityActionSuccess<any>
 
-    | IDestroyEntityAction
-    | IDestroyEntityActionSuccess
+    | IRemoveEntityAction
+    | IRemoveEntityActionSuccess
 
 /** Default State Values **/
 export const entitiesDefaultState = (): EntitiesState => ({ });

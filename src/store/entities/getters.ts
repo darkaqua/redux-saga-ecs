@@ -1,8 +1,7 @@
-import {store} from "../../dataStore";
-import {ComponentTypes} from "../../game/components/component/component.types";
+import {Factory} from "../../factory";
 
 export const getEntitiesState = () =>
-    store.getState().entities;
+    Factory.getInstance().storeFactory.store.getState().entities;
 
 export const getEntity = <TComponentData>(entityId: string): TComponentData =>
-    getEntitiesState()[entityId] as any;
+    JSON.parse(JSON.stringify(getEntitiesState()[entityId] as any));

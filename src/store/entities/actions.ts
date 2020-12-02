@@ -12,8 +12,8 @@ export interface IUpdateEntityAction<TEntityData> {
     id: string;
     entityData: TEntityData;
 }
-export interface IDestroyEntityAction {
-    type: typeof EntitiesActionTypes.DESTROY
+export interface IRemoveEntityAction {
+    type: typeof EntitiesActionTypes.REMOVE
     id: string;
 }
 
@@ -28,8 +28,8 @@ export interface IUpdateEntityActionSuccess<TEntityData> {
     id: string;
     entityData: TEntityData;
 }
-export interface IDestroyEntityActionSuccess {
-    type: typeof EntitiesActionTypes.DESTROY_SUCCESS
+export interface IRemoveEntityActionSuccess {
+    type: typeof EntitiesActionTypes.REMOVE_SUCCESS
     id: string;
 }
 

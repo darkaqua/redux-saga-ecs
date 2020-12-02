@@ -1,21 +1,12 @@
-import './dataStore';
-import {Movement} from "./game/systems/movement/movement";
-import {store} from "./dataStore";
-import {addEntityDispatchAction} from "./store/entities/dispatchers";
-import {addEntityComponentDispatchAction} from "./store/components/dispatchers";
-import {ComponentEnum} from "./game/components/component/component.enum";
-import {PositionInterface} from "./game/components/position/position.interface";
-import {SystemsFactory} from "./game/systems/systemsFactory";
+import {Factory} from "./factory";
+import {Player} from "./game/entities/player/player";
+import {TargetDirectionEnum} from "./game/components/targetDirection/targetDirection.enum";
 
-store.dispatch(addEntityDispatchAction('player'))
-store.dispatch(addEntityComponentDispatchAction<PositionInterface>(ComponentEnum.POSITION, 'player', { position: { x: 69, y: 420 } }));
-store.dispatch(addEntityComponentDispatchAction(ComponentEnum.TAG, 'player'));
-
-new Movement().update(3)
-
-const systemsFactory = SystemsFactory.getInstance();
+const factory = Factory.getInstance();
+factory.entitiesFactory.addEntity(new Player('pagoru', { x: 0, y: 10 }, TargetDirectionEnum.BOTTOM));
+factory.entitiesFactory.addEntity(new Player('Steve', { x: 0, y: 0 }, TargetDirectionEnum.NONE));
 
 setInterval(() => {
-    console.log('-------------------' + Date.now() + '-------------------');
-    systemsFactory.update(1);
+    console.log('-----------------------------' + Date.now() + '-----------------------------');
+    factory.systemsFactory.update(Math.trunc(Math.random() * 1000));
 }, 1000);

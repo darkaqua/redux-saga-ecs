@@ -1,20 +1,18 @@
 import {EntityAbstract} from "../entity/entity.abstract";
 import {ComponentEnum} from "../../components/component/component.enum";
-import {PositionInterface} from "../../components/position/position.interface";
-import {TagInterface} from "../../components/tag/tag.interface";
+import {TargetDirectionEnum} from "../../components/targetDirection/targetDirection.enum";
 
-type playerType = PositionInterface & TagInterface;
-
-export class Player extends EntityAbstract<playerType> {
+export class Player extends EntityAbstract {
 
     constructor(
-        id: string
+        username: string,
+        position: { x: number, y: number },
+        targetDirection: TargetDirectionEnum
     ) {
-        super(
-            id
-        );
-        this.addComponent<PositionInterface>(ComponentEnum.POSITION, { position: { x: 69, y: 420 } });
-        this.addComponent<TagInterface>(ComponentEnum.TAG, { tag: { username: 'username' } });
+        super();
+        this.addComponent(ComponentEnum.TARGET_DIRECTION, { targetDirection } );
+        this.addComponent(ComponentEnum.POSITION, { position } );
+        this.addComponent(ComponentEnum.TAG, { tag: { username } });
     }
 
 }

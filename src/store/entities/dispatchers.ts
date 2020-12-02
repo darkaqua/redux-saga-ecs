@@ -2,8 +2,7 @@
 import {EntitiesActionTypes} from "./types";
 import {
     IAddEntityAction,
-    IAddEntityActionSuccess,
-    IDestroyEntityAction, IDestroyEntityActionSuccess,
+    IAddEntityActionSuccess, IRemoveEntityAction, IRemoveEntityActionSuccess,
     IUpdateEntityAction,
     IUpdateEntityActionSuccess
 } from "./actions";
@@ -25,10 +24,10 @@ export const updateEntityDispatchAction = <TEntityData>(
     id,
     entityData
 });
-export const destroyEntityDispatchAction = (
+export const removeEntityDispatchAction = (
     id: string
-): IDestroyEntityAction => ({
-    type: EntitiesActionTypes.DESTROY,
+): IRemoveEntityAction => ({
+    type: EntitiesActionTypes.REMOVE,
     id
 });
 
@@ -49,10 +48,10 @@ export const updateEntityDispatchActionSuccess = <TEntityData>(
     id,
     entityData
 });
-export const destroyEntityDispatchActionSuccess = (
+export const removeEntityDispatchActionSuccess = (
     id: string
-): IDestroyEntityActionSuccess => ({
-    type: EntitiesActionTypes.DESTROY_SUCCESS,
+): IRemoveEntityActionSuccess => ({
+    type: EntitiesActionTypes.REMOVE_SUCCESS,
     id
 });
 

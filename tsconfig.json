@@ -2,7 +2,8 @@
   "compilerOptions": {
     "module": "commonjs",
     "target": "es2020",
-    "sourceMap": false
+    "sourceMap": false,
+    "noUnusedLocals": true
   },
   "exclude": [
     "node_modules"

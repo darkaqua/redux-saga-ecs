@@ -1,5 +1,6 @@
 
 import {
+    IAddComponentAction, IAddComponentActionSuccess,
     IAddEntityComponentAction,
     IAddEntityComponentActionSuccess,
     IRemoveEntityComponentAction,
@@ -10,6 +11,9 @@ import {ComponentInterface} from "../../game/components/component/component.inte
 
 /** Action Types **/
 export enum ComponentsActionTypes {
+    ADD = 'COMPONENTS@@ADD',
+    ADD_SUCCESS = 'COMPONENTS@@ADD_SUCCESS',
+
     ADD_ENTITY = 'COMPONENTS@@ADD_ENTITY',
     ADD_ENTITY_SUCCESS = 'COMPONENTS@@ADD_ENTITY_SUCCESS',
 
@@ -19,6 +23,9 @@ export enum ComponentsActionTypes {
 
 /** Action List **/
 export type ComponentsActions =
+    | IAddComponentAction
+    | IAddComponentActionSuccess
+
     | IAddEntityComponentAction<any>
     | IAddEntityComponentActionSuccess
 

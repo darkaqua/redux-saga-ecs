@@ -1,21 +1,18 @@
-import systems from "./systems";
+import {SystemAbstract} from "./system/system.abstract";
+import {Movement} from "./movement/movement";
 
 export class SystemsFactory {
 
-    private static Instance: SystemsFactory;
+    public readonly systems: SystemAbstract[];
 
-    public static getInstance (): SystemsFactory {
-        SystemsFactory.Instance = SystemsFactory.Instance || new SystemsFactory();
-        return SystemsFactory.Instance;
-    }
-
-    private constructor() {
-
+    constructor() {
+        this.systems = [
+            new Movement()
+        ];
     }
 
     update(delta: number) {
-        systems.map(system => system.update(delta));
-
+        this.systems.map(system => system.update(delta));
     }
 
 }

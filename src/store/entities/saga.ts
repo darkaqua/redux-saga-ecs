@@ -1,9 +1,8 @@
 import {all, put, takeEvery} from "@redux-saga/core/effects";
 import {EntitiesActions, EntitiesActionTypes} from "./types";
-import {IAddEntityAction, IDestroyEntityAction, IUpdateEntityAction} from "./actions";
+import {IAddEntityAction, IRemoveEntityAction, IUpdateEntityAction} from "./actions";
 import {
-    addEntityDispatchActionSuccess,
-    destroyEntityDispatchActionSuccess,
+    addEntityDispatchActionSuccess, removeEntityDispatchActionSuccess,
     updateEntityDispatchActionSuccess
 } from "./dispatchers";
 
@@ -12,7 +11,7 @@ export function* entitiesSaga() {
     yield all([
         takeEvery(EntitiesActionTypes.ADD, add),
         takeEvery(EntitiesActionTypes.UPDATE, update),
-        takeEvery(EntitiesActionTypes.DESTROY, destroy),
+        takeEvery(EntitiesActionTypes.REMOVE, remove),
     ]);
 }
 
@@ -26,6 +25,6 @@ function* update(action: IUpdateEntityAction<any>) {
     yield put<EntitiesActions>(updateEntityDispatchActionSuccess(action.id, action.entityData));
 }
 
-function* destroy(action: IDestroyEntityAction) {
-    yield put<EntitiesActions>(destroyEntityDispatchActionSuccess(action.id));
+function* remove(action: IRemoveEntityAction) {
+    yield put<EntitiesActions>(removeEntityDispatchActionSuccess(action.id));
 }
